@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardEnvy.Domain", "BoardEnvy.Domain.csproj", "{ABA0FE6B-26E9-497C-AE54-54F44CDF5BDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardEnvy.Web", "..\BoardEnvy.Web\BoardEnvy.Web.csproj", "{639A3309-A18C-4F28-83DA-26E300E6C485}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABA0FE6B-26E9-497C-AE54-54F44CDF5BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA0FE6B-26E9-497C-AE54-54F44CDF5BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA0FE6B-26E9-497C-AE54-54F44CDF5BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA0FE6B-26E9-497C-AE54-54F44CDF5BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{639A3309-A18C-4F28-83DA-26E300E6C485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{639A3309-A18C-4F28-83DA-26E300E6C485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{639A3309-A18C-4F28-83DA-26E300E6C485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{639A3309-A18C-4F28-83DA-26E300E6C485}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
