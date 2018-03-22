@@ -5,5 +5,11 @@
         public Board()
         {
         }
+
+        public int MyProperty
+        {
+            get;
+            set;
+        }
     }
 }

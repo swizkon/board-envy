@@ -5,5 +5,11 @@
         public UserStory()
         {
         }
+
+        public int BoardId
+        {
+            get;
+            set;
+        }
     }
 }
