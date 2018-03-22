@@ -1,8 +1,8 @@
 ﻿namespace BoardEnvy.Domain.Models
 {
-    public class Board
+    public class Backlog
     {
-        public int BoardId
+        public int BacklogId
         {
             get;
             set;
