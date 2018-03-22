@@ -2,10 +2,6 @@
 {
     public class UserStory
     {
-        public UserStory()
-        {
-        }
-
         public int BoardId
         {
             get;
