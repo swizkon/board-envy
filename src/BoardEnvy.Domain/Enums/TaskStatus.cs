@@ -2,8 +2,7 @@
 {
     public enum TaskStatus
     {
-        New,
-        Accepted,
+        Unassigned,
         Rejected,
         InProgress,
         Completed,

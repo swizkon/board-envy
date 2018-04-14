@@ -11,20 +11,11 @@ namespace BoardEnvy.Domain.Tests
     {
         private static readonly Fixture Fixture = new Fixture();
 
-        [Theory, MemberData(nameof(SomeTestData))]
-        public void Test(object value)
-        {
-
-        }
-
 
         public static IEnumerable<object[]> SomeTestData()
         {
             yield return new object[] { 1, new Backlog() };
             yield return new object[] { 2, new Backlog() };
-        }
-        public void Test1()
-        {
         }
 
         [Theory, MemberData(nameof(SomeTestData))]

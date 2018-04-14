@@ -21,7 +21,7 @@ namespace BoardEnvy.Web.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return "value for " + id;
         }
     }
 }

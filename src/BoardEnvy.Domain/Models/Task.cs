@@ -1,4 +1,6 @@
-﻿namespace BoardEnvy.Domain.Models
+﻿using BoardEnvy.Domain.Enums;
+
+namespace BoardEnvy.Domain.Models
 {
     public class Task
     {
@@ -19,5 +21,7 @@
             get;
             set;
         }
+
+        public TaskStatus Status { get; set; }
     }
 }
