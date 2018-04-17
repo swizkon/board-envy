@@ -1,26 +1,20 @@
 ﻿namespace BoardEnvy.Domain.Models
 {
-    public class Trouble
+    public class Collaborator
     {
-        public long TroubleId
+        public string UserKey
         {
             get;
             set;
         }
 
-        public long UserStoryId
+        public string BoardKey
         {
             get;
             set;
         }
 
-        public string Title
-        {
-            get;
-            set;
-        }
-
-        public string Description
+        public string Name
         {
             get;
             set;

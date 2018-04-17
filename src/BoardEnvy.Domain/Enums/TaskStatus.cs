@@ -4,7 +4,7 @@
     {
         Unassigned,
         Rejected,
-        InProgress,
+        Started,
         Completed,
         Closed
     }

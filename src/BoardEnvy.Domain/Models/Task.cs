@@ -4,6 +4,12 @@ namespace BoardEnvy.Domain.Models
 {
     public class Task
     {
+        public long TaskId
+        {
+            get;
+            set;
+        }
+
         public long UserStoryId
         {
             get;

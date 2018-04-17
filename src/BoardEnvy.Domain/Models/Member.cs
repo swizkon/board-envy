@@ -1,8 +1,8 @@
 ﻿namespace BoardEnvy.Domain.Models
 {
-    public class Board
+    public class Member
     {
-        public string BoardId
+        public long MemberId
         {
             get;
             set;

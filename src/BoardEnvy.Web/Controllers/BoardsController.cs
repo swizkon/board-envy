@@ -1,15 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BoardEnvy.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace BoardEnvy.Web.Controllers
 {
     [Route("api/[controller]")]
     public class BoardsController : Controller
     {
+        private readonly CloudTable _boardsTable;
+
+        public BoardsController(IConfiguration configuration)
+        {
+            var account = CloudStorageAccount.Parse(configuration["StorageConnectionString"]);
+            var tableClient = account.CreateCloudTableClient();
+
+            _boardsTable = tableClient.GetTableReference("Boards");
+            _boardsTable.CreateIfNotExistsAsync().Wait();
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<Board> Get()
@@ -30,5 +42,27 @@ namespace BoardEnvy.Web.Controllers
         {
             return "tasks for " + id;
         }
+
+
+        [HttpPost]
+        public void Post([FromBody] CreateBoardModel data)
+        {
+            var insert = TableOperation.Insert(new AzureBoard(data.Name));
+            _boardsTable.ExecuteAsync(insert);
+        }
+    }
+
+    public class AzureBoard : TableEntity
+    {
+        public string Name { get; set; }
+
+        public AzureBoard(string name)
+        {
+            PartitionKey = "Boards";
+            RowKey = Guid.NewGuid().ToString();
+            Name = name;
+        }
+
+        public AzureBoard() { }
     }
 }
