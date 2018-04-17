@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha1-final" />
-    <PackageReference Include="WindowsAzure.Storage" Version="8.6.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
   </ItemGroup>
 
@@ -26,5 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BoardEnvy.Domain\BoardEnvy.Domain.csproj" />
+    <ProjectReference Include="..\BoardEnvy.Infrastructure.Azure\BoardEnvy.Infrastructure.Azure.csproj" />
   </ItemGroup>
 </Project>

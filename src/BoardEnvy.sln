@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B11CCCC3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardEnvy.Domain.Tests", "BoardEnvy.Domain.Tests\BoardEnvy.Domain.Tests.csproj", "{F6EAD235-8DBF-4B48-A682-233E73C8B941}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardEnvy.Infrastructure.Azure", "BoardEnvy.Infrastructure.Azure\BoardEnvy.Infrastructure.Azure.csproj", "{2943EA5D-A703-4392-B2E9-0683CE94BCB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F6EAD235-8DBF-4B48-A682-233E73C8B941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6EAD235-8DBF-4B48-A682-233E73C8B941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6EAD235-8DBF-4B48-A682-233E73C8B941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2943EA5D-A703-4392-B2E9-0683CE94BCB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2943EA5D-A703-4392-B2E9-0683CE94BCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2943EA5D-A703-4392-B2E9-0683CE94BCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2943EA5D-A703-4392-B2E9-0683CE94BCB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F6EAD235-8DBF-4B48-A682-233E73C8B941} = {B11CCCC3-BE05-4FD0-87A2-0F0B83AB10D2}
