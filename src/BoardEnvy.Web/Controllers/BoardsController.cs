@@ -60,6 +60,7 @@ namespace BoardEnvy.Web.Controllers
         {
             PartitionKey = "Boards";
             RowKey = Guid.NewGuid().ToString();
+
             Name = name;
         }
 

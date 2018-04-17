@@ -8,9 +8,16 @@ namespace BoardEnvy.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env) //IConfiguration configuration)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -36,6 +43,14 @@ namespace BoardEnvy.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var builder = new ConfigurationBuilder();
+
+            builder.SetBasePath(env.ContentRootPath)
+                   .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                   .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                   .AddEnvironmentVariables();
+            
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

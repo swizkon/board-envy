@@ -2,7 +2,7 @@
 {
     public class Board
     {
-        public string BoardId
+        public string BoardKey
         {
             get;
             set;
