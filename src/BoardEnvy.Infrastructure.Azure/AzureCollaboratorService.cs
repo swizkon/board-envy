@@ -1,5 +1,4 @@
-﻿
-namespace BoardEnvy.Infrastructure.Azure
+﻿namespace BoardEnvy.Infrastructure.Azure
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -18,11 +17,13 @@ namespace BoardEnvy.Infrastructure.Azure
 
         public Board CreateBoard(string userkey, string boardName)
         {
-            var boardEntity = new AzureBoard(boardName);
-            var insert = TableOperation.Insert(boardEntity);
+            var membershipEntity = new AzureBoardMembership(userkey, boardName, true);
+            GetTableReference("BoardMemberships")
+                .ExecuteAsync(TableOperation.Insert(membershipEntity));
 
-            var boardsTable = base.GetTableReference("Boards");
-            boardsTable.ExecuteAsync(insert);
+            var boardEntity = new AzureBoard(boardName);
+            GetTableReference("Boards")
+                .ExecuteAsync(TableOperation.Insert(boardEntity));
 
             return new Board
             {
@@ -33,7 +34,8 @@ namespace BoardEnvy.Infrastructure.Azure
 
         public async Task<IEnumerable<Board>> GetAllBoards()
         {
-            var query = new TableQuery<AzureBoard>();
+            var query = new TableQuery<AzureBoard>()
+                .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "Boards"));
 
             var boardsTable = base.GetTableReference("Boards");
 
