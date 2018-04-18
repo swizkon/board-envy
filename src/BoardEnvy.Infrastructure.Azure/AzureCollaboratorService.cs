@@ -1,39 +1,27 @@
 ﻿
 namespace BoardEnvy.Infrastructure.Azure
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using BoardEnvy.Domain.Models;
     using Microsoft.Extensions.Configuration;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
 
-    public class AzureCollaboratorService
+    public class AzureCollaboratorService : AzureTableStorageBase
     {
-        private readonly CloudStorageAccount _cloudStorageAccount;
-        private readonly CloudTableClient _tableClient;
-
         public AzureCollaboratorService(IConfiguration configuration)
+            : base(configuration)
         {
-            _cloudStorageAccount = CloudStorageAccount.Parse(configuration["StorageConnectionString"]);
-            _tableClient = _cloudStorageAccount.CreateCloudTableClient();
         }
-
-        /*
-        public IList<Board> BoardsByUser(string userkey)
-        {
-
-        }
-        */
 
         public Board CreateBoard(string userkey, string boardName)
         {
             var boardEntity = new AzureBoard(boardName);
             var insert = TableOperation.Insert(boardEntity);
 
-            var boardsTable = _tableClient.GetTableReference("Boards");
-            boardsTable.CreateIfNotExistsAsync().Wait();
-
+            var boardsTable = base.GetTableReference("Boards");
             boardsTable.ExecuteAsync(insert);
 
             return new Board
@@ -43,11 +31,19 @@ namespace BoardEnvy.Infrastructure.Azure
             };
         }
 
-        public IEnumerable<Board> GetAllBoards()
+        public async Task<IEnumerable<Board>> GetAllBoards()
         {
             var query = new TableQuery<AzureBoard>();
 
-            return new Board[] { new Board(), new Board() };
+            var boardsTable = base.GetTableReference("Boards");
+
+            var data = await boardsTable.ExecuteQuerySegmentedAsync<AzureBoard>(query, null);
+            return data.Results
+                       .Select(x => new Board
+                       {
+                           BoardKey = x.RowKey,
+                           Name = x.Name
+                       });
         }
     }
 }
