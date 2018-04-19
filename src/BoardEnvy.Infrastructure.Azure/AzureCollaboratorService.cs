@@ -82,10 +82,10 @@
             // board.
             var memberships = GetTableReference("Memberships");
 
-            var userEntry = new AzureBoardMembership("user-" + collaborator.UserKey, "board-" + board.BoardKey, board.Name, true);
+            var userEntry = new AzureBoardMembership("user-" + collaborator.UserKey, "board-" + board.BoardKey, board.Name, false);
             memberships.ExecuteAsync(TableOperation.Insert(userEntry));
 
-            var boardEntry = new AzureBoardMembership("board-" + board.BoardKey, "user-" + collaborator.UserKey, collaborator.DisplayName, true);
+            var boardEntry = new AzureBoardMembership("board-" + board.BoardKey, "user-" + collaborator.UserKey, collaborator.DisplayName, false);
             memberships.ExecuteAsync(TableOperation.Insert(boardEntry));
 		}
 
@@ -100,9 +100,20 @@
             return data.Results
                        .Select(x => new Board
                        {
-                           BoardKey = x.RowKey,
+                           BoardKey = x.RowKey.Replace("board-", ""),
                            Name = x.DisplayName
                        });
+        }
+
+        public async Task<IEnumerable<Collaborator>> GetCollaborators(Guid boardId)
+        {
+            var query = new TableQuery<AzureBoardMembership>()
+                .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "board-" + boardId.ToString()));
+
+            var boardsTable = base.GetTableReference("Memberships");
+
+            var data = await boardsTable.ExecuteQuerySegmentedAsync<AzureBoardMembership>(query, null);
+            return data.Results.Select(x => new Collaborator(x.RowKey.Replace("user-", ""), x.DisplayName));
         }
     }
 }

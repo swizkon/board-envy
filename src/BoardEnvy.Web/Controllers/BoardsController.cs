@@ -48,6 +48,13 @@ namespace BoardEnvy.Web.Controllers
             _service.CreateBoard(user, data.Name);
         }
 
+        [HttpGet("{id}/collaborators")]
+        public async Task<IEnumerable<Collaborator>> GetCollaborators(Guid id)
+        {
+            return await _service.GetCollaborators(id);
+
+        }
+
         [HttpPost("{id}/collaborators")]
         public async Task<ActionResult> Post(Guid id, [FromBody] CreateCollaboratorModel data)
         {
