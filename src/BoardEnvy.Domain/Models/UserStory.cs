@@ -1,4 +1,6 @@
-﻿namespace BoardEnvy.Domain.Models
+﻿using BoardEnvy.Domain.Enums;
+
+namespace BoardEnvy.Domain.Models
 {
     public class UserStory
     {
@@ -25,5 +27,7 @@
             get;
             set;
         }
+
+        public StoryStatus Status { get; set; }
     }
 }

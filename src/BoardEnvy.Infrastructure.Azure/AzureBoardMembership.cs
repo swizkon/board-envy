@@ -3,14 +3,17 @@ namespace BoardEnvy.Infrastructure.Azure
 {
     using Microsoft.WindowsAzure.Storage.Table;
 
-    internal class AzureBoardMembership : TableEntity
+    class AzureBoardMembership : TableEntity
     {
         public bool Owner { get; set; }
 
-        public AzureBoardMembership(string userkey, string boardName, bool owner)
+        public string DisplayName { get; set; }
+
+        public AzureBoardMembership(string partition, string row, string displayName, bool owner)
         {
-            PartitionKey = userkey;
-            RowKey = boardName;
+            PartitionKey = partition;
+            RowKey = row;
+            DisplayName = displayName;
             Owner = owner;
         }
 

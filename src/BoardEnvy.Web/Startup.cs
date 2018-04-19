@@ -8,7 +8,7 @@ namespace BoardEnvy.Web
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env) //IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder();
 
@@ -51,7 +51,6 @@ namespace BoardEnvy.Web
                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                    .AddEnvironmentVariables();
             
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

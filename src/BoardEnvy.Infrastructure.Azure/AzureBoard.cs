@@ -4,17 +4,17 @@ namespace BoardEnvy.Infrastructure.Azure
     using System;
     using Microsoft.WindowsAzure.Storage.Table;
 
-    internal class AzureBoard : TableEntity
+    class AzureBoard : TableEntity
     {
-        public string Name { get; set; }
-
-        public AzureBoard(string name)
+        public AzureBoard(Guid id, string name)
         {
             PartitionKey = "Boards";
-            RowKey = Guid.NewGuid().ToString();
+            RowKey = id.ToString();
 
             Name = name;
         }
+
+        public string Name { get; set; }
 
         public AzureBoard() { }
     }

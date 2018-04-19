@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using BoardEnvy.Domain.Models;
 using BoardEnvy.Infrastructure.Azure;
@@ -43,7 +44,8 @@ namespace BoardEnvy.Web.Controllers
         [HttpPost]
         public void Post([FromBody] CreateBoardModel data)
         {
-            _service.CreateBoard(_username, data.Name);
+            var user = new Collaborator(new MailAddress("swizkon@gmail.com", "Swizkon"));
+            _service.CreateBoard(user, data.Name);
         }
     }
 }
