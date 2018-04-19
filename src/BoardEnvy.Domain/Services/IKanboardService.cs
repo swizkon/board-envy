@@ -6,8 +6,8 @@ namespace BoardEnvy.Domain.Services
 {
     public interface IKanboardService
     {
-        IEnumerable<Board> GetBoards(string userKey);
+        IEnumerable<Board> GetBoards(Collaborator user);
 
-        IEnumerable<UserStory> GetStories(Board board);
+        IEnumerable<Story> GetStories(Board board);
     }
 }

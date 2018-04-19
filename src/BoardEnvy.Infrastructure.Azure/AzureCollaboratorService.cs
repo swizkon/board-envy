@@ -54,7 +54,42 @@
                        });
         }
 
-        public async Task<IEnumerable<Board>> GetBoardsForUser(string userkey)
+        public async Task<Board> GetBoard(Guid id)
+        {
+            var table = base.GetTableReference("Boards");
+
+            var retrieveOperation = TableOperation.Retrieve<AzureBoard>("Boards", id.ToString());
+
+            // Execute the retrieve operation.
+            var retrievedResult = await table.ExecuteAsync(retrieveOperation);
+
+            // Print the phone number of the result.
+            if (retrievedResult.Result != null)
+            {
+                var med = (AzureBoard) retrievedResult.Result;
+                return new Board
+                {
+                    BoardKey = med.RowKey,
+                    Name = med.Name
+                };
+            }
+
+            return null;
+        }
+
+        public void AddCollaborator(Board board, Collaborator collaborator)
+		{
+            // board.
+            var memberships = GetTableReference("Memberships");
+
+            var userEntry = new AzureBoardMembership("user-" + collaborator.UserKey, "board-" + board.BoardKey, board.Name, true);
+            memberships.ExecuteAsync(TableOperation.Insert(userEntry));
+
+            var boardEntry = new AzureBoardMembership("board-" + board.BoardKey, "user-" + collaborator.UserKey, collaborator.DisplayName, true);
+            memberships.ExecuteAsync(TableOperation.Insert(boardEntry));
+		}
+
+		public async Task<IEnumerable<Board>> GetBoardsForUser(string userkey)
         {
             var query = new TableQuery<AzureBoardMembership>()
                 .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "user-" + userkey));

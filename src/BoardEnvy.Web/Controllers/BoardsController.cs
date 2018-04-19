@@ -47,5 +47,15 @@ namespace BoardEnvy.Web.Controllers
             var user = new Collaborator(new MailAddress("swizkon@gmail.com", "Swizkon"));
             _service.CreateBoard(user, data.Name);
         }
+
+        [HttpPost("{id}/collaborators")]
+        public async Task<ActionResult> Post(Guid id, [FromBody] CreateCollaboratorModel data)
+        {
+            var board = await _service.GetBoard(id);
+            var collaborator = new Collaborator(new MailAddress(data.Email, data.DisplayName));
+            _service.AddCollaborator(board, collaborator);
+
+            return Ok();
+        }
     }
 }
