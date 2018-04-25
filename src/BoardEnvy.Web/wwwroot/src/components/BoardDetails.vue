@@ -16,8 +16,8 @@
 
     <h2>collaborators</h2>
           <span v-for="(collaborator, index) in collaborators">
-              <img :src="collaborator.thumb" />
-              <h1>{{collaborator.displayName}}</h1>
+              <img :src="collaborator.thumb" class="circle" />
+              <h3>{{collaborator.displayName}}</h3>
           </span>
   </div>
 </template>
