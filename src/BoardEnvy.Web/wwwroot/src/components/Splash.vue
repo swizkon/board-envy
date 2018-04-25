@@ -46,7 +46,7 @@ import Footer from '../components/Footer'
                         return {
                             "name": o.name,
                             "id": o.boardKey,
-                            "url": `/board.html#/${o.boardKey}/overview`
+                            "url": `/board.html#/boards/${o.boardKey}/overview`
                         }
                     })
             _this.msg = "Your boards...";

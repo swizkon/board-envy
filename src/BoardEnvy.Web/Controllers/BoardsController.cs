@@ -32,7 +32,7 @@ namespace BoardEnvy.Web.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value for " + id;
+            return "Details for " + id;
         }
 
         [HttpGet("{id}/tasks")]
@@ -52,7 +52,6 @@ namespace BoardEnvy.Web.Controllers
         public async Task<IEnumerable<Collaborator>> GetCollaborators(Guid id)
         {
             return await _service.GetCollaborators(id);
-
         }
 
         [HttpPost("{id}/collaborators")]

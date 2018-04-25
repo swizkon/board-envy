@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Hello from '../components/Hello'
-import CircuitDetails from '../components/CircuitDetails'
+import BoardDetails from '../components/BoardDetails'
 import HubTest from '../components/HubTest'
 import Practice from '../components/Practice'
 
@@ -16,9 +16,9 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/circuits/:id/overview',
-      name: 'CircuitDetails',
-      component: CircuitDetails
+      path: '/boards/:id/overview',
+      name: 'BoardDetails',
+      component: BoardDetails
     },
     {
       path: '/circuits/:id/hubtest',
