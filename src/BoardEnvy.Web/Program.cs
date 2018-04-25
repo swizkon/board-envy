@@ -16,9 +16,10 @@ namespace BoardEnvy.Web
         {
             BuildWebHost(args).Run();
         }
-
+        
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "public"))
                 .UseStartup<Startup>()
                 .Build();
     }
