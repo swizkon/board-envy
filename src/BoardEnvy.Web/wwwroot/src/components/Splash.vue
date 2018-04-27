@@ -5,6 +5,15 @@
       <div class="hello">
         <h2>{{ msg }}</h2>
       </div>
+      <div>
+        <form @submit.prevent="handleSubmit">
+          <label>
+            New board:
+            <input type="text" placeholder="Enter board name" v-model="board.name"/>
+          </label>
+          <button type="submit">Create board</button>
+        </form>
+      </div>
     
 <div>
           <span v-for="(item, index) in items">
@@ -32,7 +41,10 @@ import Footer from '../components/Footer'
     data() {
       return {
         msg: 'Loading boards...',
-        items: null
+        items: null,
+        board: {
+          name: ''
+        }
       }
     },
     components: {
@@ -51,6 +63,17 @@ import Footer from '../components/Footer'
                     })
             _this.msg = "Your boards...";
         })
+    },
+    methods: {
+      handleSubmit() {
+      var _this = this;
+        // Send data to the server or update your stores and such.
+        let formData = new FormData(arguments[0]);
+        console.log(formData);
+        console.log(formData.entries());
+        // this.$http.post('/api/boards', formData);
+        _this.board.name = "";
+      }
     }
   } 
 </script>
