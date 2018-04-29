@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import BrowserUtil from './js/BrowserUtil'
 import Splash from './components/Splash'
 
 import "vueify/lib/insert-css"

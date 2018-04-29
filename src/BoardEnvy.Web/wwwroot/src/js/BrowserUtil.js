@@ -11,4 +11,22 @@ BrowserUtil.getQueryParameter = function(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+BrowserUtil.getJSON = function(url, callback) {
+    $.getJSON(url, callback)
+}
+
+BrowserUtil.sendJSON = function(url, data, callback) {
+    $.getJSON(url, callback)
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        // async: false,
+        success: callback
+    });
+}
+
 export default BrowserUtil;

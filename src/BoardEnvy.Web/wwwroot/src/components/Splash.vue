@@ -17,10 +17,9 @@
     
 <div>
           <span v-for="(item, index) in items">
-              <h1>{{item.name}}</h1>
                     <p>
                 <a class="btn btn-default" :href="item.url">
-                  Practice
+                  <h1>{{item.name}}</h1>
                 </a>
                     </p>
           </span>
@@ -32,7 +31,7 @@
 </template>
 
 <script>
-
+import BrowserUtil from "../js/BrowserUtil"
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -53,7 +52,7 @@ import Footer from '../components/Footer'
     },
     created () {
       var _this = this;
-        $.getJSON('/api/boards', function (json) {
+      BrowserUtil.getJSON('/api/boards', function (json) {
             _this.items = $.map(json, (o, i) => {
                         return {
                             "name": o.name,
@@ -68,10 +67,9 @@ import Footer from '../components/Footer'
       handleSubmit() {
       var _this = this;
         // Send data to the server or update your stores and such.
-        let formData = new FormData(arguments[0]);
-        console.log(formData);
-        console.log(formData.entries());
-        // this.$http.post('/api/boards', formData);
+        BrowserUtil.sendJSON('/api/boards', {name: _this.board.name}, function (json) {
+                    console.log(arguments);
+        })
         _this.board.name = "";
       }
     }
