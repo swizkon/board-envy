@@ -5,11 +5,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using BoardEnvy.Domain.Models;
+    using BoardEnvy.Domain.Interfaces;
     using Microsoft.Extensions.Configuration;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
 
-    public class AzureCollaboratorService : AzureTableStorageBase
+    public class AzureCollaboratorService : AzureTableStorageBase, IBoardService
     {
         public AzureCollaboratorService(IConfiguration configuration)
             : base(configuration)

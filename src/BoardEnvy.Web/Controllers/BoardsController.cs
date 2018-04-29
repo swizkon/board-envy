@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using BoardEnvy.Domain.Models;
+using BoardEnvy.Domain.Interfaces;
 using BoardEnvy.Infrastructure.Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,11 +17,11 @@ namespace BoardEnvy.Web.Controllers
     {
         readonly string _username = "swizkon";
 
-        private readonly AzureCollaboratorService _service;
+        private readonly IBoardService _service;
 
-        public BoardsController(IConfiguration configuration)
+        public BoardsController(IBoardService service)
         {
-            _service = new AzureCollaboratorService(configuration);
+            _service = service;
         }
 
         [HttpGet]

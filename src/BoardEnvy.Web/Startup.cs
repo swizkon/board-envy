@@ -4,6 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 
+using BoardEnvy.Domain.Interfaces;
+using BoardEnvy.Infrastructure.Azure;
+
 namespace BoardEnvy.Web
 {
     public class Startup
@@ -25,8 +28,9 @@ namespace BoardEnvy.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IBoardService, AzureCollaboratorService>();
+    
             services.AddMvc();
-
             services.AddMvc();
             services.AddSignalR();
 
