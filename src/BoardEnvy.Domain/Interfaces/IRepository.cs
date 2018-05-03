@@ -1,5 +1,4 @@
-﻿
-namespace BoardEnvy.Domain.Interfaces
+﻿namespace BoardEnvy.Domain.Interfaces
 {
     using System.Collections.Generic;
     
@@ -8,5 +7,7 @@ namespace BoardEnvy.Domain.Interfaces
         IList<T> All(string partitionKey);
 
         T Get(string partitionKey, string entityKey);
+
+        T Add(T entity);
     }
 }
