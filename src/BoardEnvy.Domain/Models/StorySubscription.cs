@@ -1,8 +1,8 @@
 ﻿namespace BoardEnvy.Domain.Models
 {
-    public class UserStorySubscription
+    public class StorySubscription
     {
-        public UserStorySubscription()
+        public StorySubscription()
         {
         }
 

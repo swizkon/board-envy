@@ -10,7 +10,7 @@ namespace BoardEnvy.Domain.Models
             set;
         }
 
-        public long UserStoryId
+        public long StoryId
         {
             get;
             set;
