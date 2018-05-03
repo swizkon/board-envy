@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BoardEnvy.Web.Controllers
 {
     [Route("api/[controller]")]
+    // [Authorize]
     public class BoardsController : Controller
     {
         readonly string _username = "swizkon";

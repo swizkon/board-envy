@@ -15,22 +15,23 @@
     </div>
 
     <h2>collaborators</h2>
-          <span v-for="(collaborator, index) in collaborators">
-              <img :src="collaborator.thumb" class="circle" />
-              <h3>{{collaborator.displayName}}</h3>
-          </span>
+    <span v-for="(collaborator, index) in collaborators">
+      <img :src="collaborator.thumb" class="circle" />
+      <h3>{{collaborator.displayName}}</h3>
+    </span>
+
         <div @keydown.enter="handleSubmit">
     <label>
       Email:
-      <input type="email" v-model="user.email"/>
+      <input type="email" v-model="email"/>
     </label>
     <label>
       Name:
-      <input type="text" v-model="user.name"/>
+      <input type="text" v-model="name"/>
     </label>
     <label>
       Password:
-      <input type="password" v-model="user.password"/>
+      <input type="password" v-model="password"/>
     </label>
     <button @click="handleSubmit">Submit</button>
   </div>
