@@ -16,7 +16,7 @@
 
     <h2>collaborators</h2>
     <span v-for="(collaborator, index) in collaborators">
-      <img :src="collaborator.thumb" class="circle" />
+      <img :src="collaborator.thumb" class="img-circle" />
       <h3>{{collaborator.displayName}}</h3>
     </span>
 
@@ -60,7 +60,7 @@
           _this.collaborators = $.map(data, (o, i) => {
                         return {
                             "displayName": o.displayName,
-                            "thumb": `https://www.gravatar.com/avatar/${o.userKey}?d=mm`
+                            "thumb": `https://www.gravatar.com/avatar/${o.userKey}?d=mm&s=200`
                         }
                     })
       }, (err) => {
