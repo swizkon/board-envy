@@ -17,11 +17,9 @@
     
 <div>
           <span v-for="(item, index) in items">
-                    <p>
                 <a class="btn btn-default" :href="item.url">
                   <h1>{{item.name}}</h1>
                 </a>
-                    </p>
           </span>
 </div>
 
@@ -51,26 +49,30 @@ import Footer from '../components/Footer'
       'app-footer': Footer
     },
     created () {
-      var _this = this;
-      BrowserUtil.getJSON('/api/boards', function (json) {
-            _this.items = $.map(json, (o, i) => {
-                        return {
-                            "name": o.name,
-                            "id": o.boardKey,
-                            "url": `/board.html#/boards/${o.boardKey}/overview`
-                        }
-                    })
-            _this.msg = "Your boards...";
-        })
+      this.loadBoards();
     },
     methods: {
       handleSubmit() {
-      var _this = this;
+        var _this = this;
         // Send data to the server or update your stores and such.
         BrowserUtil.sendJSON('/api/boards', {name: _this.board.name}, function (json) {
                     console.log(arguments);
         })
         _this.board.name = "";
+        _this.loadBoards();
+      },
+      loadBoards() {
+        var _this = this;
+        BrowserUtil.getJSON('/api/boards', function (json) {
+              _this.items = $.map(json, (o, i) => {
+                          return {
+                              "name": o.name,
+                              "id": o.boardKey,
+                              "url": `/board.html#/boards/${o.boardKey}/overview`
+                          }
+                      })
+              _this.msg = "Your boards ...";
+          })
       }
     }
   } 
