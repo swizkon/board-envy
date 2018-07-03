@@ -1,6 +1,7 @@
 ﻿
 namespace BoardEnvy.Infrastructure.Azure
 {
+    using System.Diagnostics;
     using Microsoft.Extensions.Configuration;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
@@ -11,8 +12,11 @@ namespace BoardEnvy.Infrastructure.Azure
 
         public AzureTableStorageBase(IConfiguration configuration)
         {
-            var cloudStorageAccount = CloudStorageAccount.Parse(configuration["StorageConnectionString"]);
+            var connectionString = "UseDevelopmentStorage=true";
+            // var connString = configuration["StorageConnectionString"];
+            var cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
             _tableClient = cloudStorageAccount.CreateCloudTableClient();
+            Trace.WriteLine(connectionString);
         }
 
         protected CloudTable GetTableReference(string tableName)

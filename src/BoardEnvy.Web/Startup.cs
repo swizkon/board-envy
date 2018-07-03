@@ -17,7 +17,10 @@ namespace BoardEnvy.Web
 
             if (env.IsDevelopment())
             {
-                builder.AddUserSecrets<Startup>();
+                builder.AddCommandLine(new string[]{
+                       "--StorageConnectionString", "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;"
+                   });
+                // builder.AddUserSecrets<Startup>();
             }
 
             Configuration = builder.Build();
@@ -53,7 +56,10 @@ namespace BoardEnvy.Web
             builder.SetBasePath(env.ContentRootPath)
                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                   .AddEnvironmentVariables();
+                   // .AddEnvironmentVariables()
+                   .AddCommandLine(new string[]{
+                       "--StorageConnectionString", "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;"
+                   });
             
             app.UseSwagger();
             app.UseSwaggerUI(c =>
