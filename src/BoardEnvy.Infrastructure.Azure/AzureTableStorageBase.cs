@@ -21,7 +21,7 @@ namespace BoardEnvy.Infrastructure.Azure
 
         protected CloudTable GetTableReference(string tableName)
         {
-            var table = _tableClient.GetTableReference(tableName);
+            var table = _tableClient.GetTableReference(tableName.ToLower());
             table.CreateIfNotExistsAsync().Wait();
 
             return table;

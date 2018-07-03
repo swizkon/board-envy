@@ -41,8 +41,8 @@
 
         public async Task<IEnumerable<Board>> GetAllBoards()
         {
-            var query = new TableQuery<AzureBoard>()
-                .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "Boards"));
+            var query = new TableQuery<AzureBoard>();
+            //.Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "boards"));
 
             var boardsTable = base.GetTableReference("Boards");
 
@@ -57,9 +57,9 @@
 
         public async Task<Board> GetBoard(Guid id)
         {
-            var table = base.GetTableReference("Boards");
+            var table = base.GetTableReference("boards");
 
-            var retrieveOperation = TableOperation.Retrieve<AzureBoard>("Boards", id.ToString());
+            var retrieveOperation = TableOperation.Retrieve<AzureBoard>("boards", id.ToString());
 
             // Execute the retrieve operation.
             var retrievedResult = await table.ExecuteAsync(retrieveOperation);
@@ -81,7 +81,7 @@
         public void AddCollaborator(Board board, Collaborator collaborator)
 		{
             // board.
-            var memberships = GetTableReference("Memberships");
+            var memberships = GetTableReference("memberships");
 
             var userEntry = new AzureBoardMembership("user-" + collaborator.UserKey, "board-" + board.BoardKey, board.Name, false);
             memberships.ExecuteAsync(TableOperation.Insert(userEntry));
@@ -95,7 +95,7 @@
             var query = new TableQuery<AzureBoardMembership>()
                 .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "user-" + userkey));
 
-            var boardsTable = base.GetTableReference("Memberships");
+            var boardsTable = base.GetTableReference("memberships");
 
             var data = await boardsTable.ExecuteQuerySegmentedAsync<AzureBoardMembership>(query, null);
             return data.Results
@@ -111,7 +111,7 @@
             var query = new TableQuery<AzureBoardMembership>()
                 .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "board-" + boardId.ToString()));
 
-            var boardsTable = base.GetTableReference("Memberships");
+            var boardsTable = base.GetTableReference("memberships");
 
             var data = await boardsTable.ExecuteQuerySegmentedAsync<AzureBoardMembership>(query, null);
             return data.Results.Select(x => new Collaborator(x.RowKey.Replace("user-", ""), x.DisplayName));
