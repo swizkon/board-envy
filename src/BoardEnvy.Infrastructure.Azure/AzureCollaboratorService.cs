@@ -9,6 +9,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Table;
+    using System.Diagnostics;
 
     public class AzureCollaboratorService : AzureTableStorageBase, IBoardService
     {
@@ -41,8 +42,9 @@
 
         public async Task<IEnumerable<Board>> GetAllBoards()
         {
+            var q = TableQuery.GenerateFilterCondition("", QueryComparisons.Equal, "");
             var query = new TableQuery<AzureBoard>();
-            //.Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "boards"));
+            // .Where(TableQuery.GenerateFilterCondition("partitionKey", QueryComparisons.Equal, "boards"));
 
             var boardsTable = base.GetTableReference("Boards");
 
@@ -93,7 +95,7 @@
 		public async Task<IEnumerable<Board>> GetBoardsForUser(string userkey)
         {
             var query = new TableQuery<AzureBoardMembership>()
-                .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "user-" + userkey));
+                .Where(TableQuery.GenerateFilterCondition("partitionKey", QueryComparisons.Equal, "user-" + userkey));
 
             var boardsTable = base.GetTableReference("memberships");
 
@@ -109,7 +111,8 @@
         public async Task<IEnumerable<Collaborator>> GetCollaborators(Guid boardId)
         {
             var query = new TableQuery<AzureBoardMembership>()
-                .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "board-" + boardId.ToString()));
+                .Where(TableQuery.GenerateFilterCondition("partitionKey", QueryComparisons.Equal, "board-" + boardId.ToString())); //.Replace("'", "\""));
+            Trace.WriteLine(query.FilterString);
 
             var boardsTable = base.GetTableReference("memberships");
 
