@@ -9,10 +9,14 @@ namespace BoardEnvy.Infrastructure.Azure
 
         public string DisplayName { get; set; }
 
-        public AzureBoardMembership(string partition, string row, string displayName, bool owner)
+        public string ListName { get; set; }
+
+        public AzureBoardMembership(string listName, string row, string displayName, bool owner)
         {
-            PartitionKey = partition;
+            PartitionKey = listName;
             RowKey = row;
+
+            ListName = listName;
             DisplayName = displayName;
             Owner = owner;
         }

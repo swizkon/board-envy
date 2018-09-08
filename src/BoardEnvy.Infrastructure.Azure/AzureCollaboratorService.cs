@@ -44,7 +44,7 @@
         {
             var q = TableQuery.GenerateFilterCondition("", QueryComparisons.Equal, "");
             var query = new TableQuery<AzureBoard>();
-            // .Where(TableQuery.GenerateFilterCondition("partitionKey", QueryComparisons.Equal, "boards"));
+            // .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "boards"));
 
             var boardsTable = base.GetTableReference("Boards");
 
@@ -63,10 +63,8 @@
 
             var retrieveOperation = TableOperation.Retrieve<AzureBoard>("boards", id.ToString());
 
-            // Execute the retrieve operation.
             var retrievedResult = await table.ExecuteAsync(retrieveOperation);
 
-            // Print the phone number of the result.
             if (retrievedResult.Result != null)
             {
                 var med = (AzureBoard) retrievedResult.Result;
@@ -82,7 +80,6 @@
 
         public void AddCollaborator(Board board, Collaborator collaborator)
 		{
-            // board.
             var memberships = GetTableReference("memberships");
 
             var userEntry = new AzureBoardMembership("user-" + collaborator.UserKey, "board-" + board.BoardKey, board.Name, false);
@@ -95,7 +92,8 @@
 		public async Task<IEnumerable<Board>> GetBoardsForUser(string userkey)
         {
             var query = new TableQuery<AzureBoardMembership>()
-                .Where(TableQuery.GenerateFilterCondition("partitionKey", QueryComparisons.Equal, "user-" + userkey));
+                // .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "user-" + userkey));
+                .Where(TableQuery.GenerateFilterCondition("ListName", QueryComparisons.Equal, "user-" + userkey));
 
             var boardsTable = base.GetTableReference("memberships");
 
@@ -111,7 +109,12 @@
         public async Task<IEnumerable<Collaborator>> GetCollaborators(Guid boardId)
         {
             var query = new TableQuery<AzureBoardMembership>()
-                .Where(TableQuery.GenerateFilterCondition("partitionKey", QueryComparisons.Equal, "board-" + boardId.ToString())); //.Replace("'", "\""));
+                // .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "board-" + boardId.ToString()));
+                .Where(TableQuery.GenerateFilterCondition("ListName", QueryComparisons.Equal, "board-" + boardId.ToString()));
+                //.Replace("'", "\""));
+                // .Where(TableQuery.GenerateFilterCondition("ListName", QueryComparisons.Equal, "user-" + userkey));
+                
+
             Trace.WriteLine(query.FilterString);
 
             var boardsTable = base.GetTableReference("memberships");
